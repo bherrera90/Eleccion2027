@@ -54,7 +54,7 @@ beforeAll(async () => {
         title: "Opción A",
         description: "Primera",
         tag: "A",
-        imagePath: "/images/option-1.svg",
+        imagePath: "/images/Promo20271.jpeg",
         position: 1,
       },
       {
@@ -62,7 +62,7 @@ beforeAll(async () => {
         title: "Opción B",
         description: "Segunda",
         tag: "B",
-        imagePath: "/images/option-2.svg",
+        imagePath: "/images/Promo20272.jpeg",
         position: 2,
       },
     ])
@@ -85,7 +85,7 @@ beforeAll(async () => {
       title: "Ajena",
       description: "Opción de otra encuesta",
       tag: "X",
-      imagePath: "/images/option-3.svg",
+      imagePath: "/images/Promo20273.jpeg",
       position: 1,
     })
     .returning();

@@ -11,18 +11,54 @@ export type DbConnection = {
   db: Database;
 };
 
+function firstEnv(...keys: string[]) {
+  for (const key of keys) {
+    const value = process.env[key]?.trim();
+    if (value) {
+      return value;
+    }
+  }
+
+  return undefined;
+}
+
 export function defaultDatabaseUrl() {
-  return process.env.DATABASE_URL ?? "file:./data/survey.db";
+  const configured = firstEnv("DATABASE_URL", "TURSO_DATABASE_URL");
+  if (configured) {
+    return configured;
+  }
+
+  if (process.env.VERCEL) {
+    throw new Error(
+      "Falta DATABASE_URL o TURSO_DATABASE_URL. En Vercel no se puede usar SQLite en disco.",
+    );
+  }
+
+  return "file:./data/survey.db";
+}
+
+export function databaseAuthToken() {
+  return firstEnv("DATABASE_AUTH_TOKEN", "TURSO_AUTH_TOKEN");
 }
 
 export function createDb(url = defaultDatabaseUrl()): DbConnection {
-  if (url.startsWith("file:")) {
-    mkdirSync(dirname(url.slice("file:".length)), { recursive: true });
+  const normalizedUrl = url.startsWith("libsql://")
+    ? url.replace("libsql://", "https://")
+    : url;
+
+  if (normalizedUrl.startsWith("file:")) {
+    if (process.env.VERCEL) {
+      throw new Error(
+        "SQLite en archivo no funciona en Vercel. Configura una base Turso.",
+      );
+    }
+
+    mkdirSync(dirname(normalizedUrl.slice("file:".length)), { recursive: true });
   }
 
-  const authToken = process.env.DATABASE_AUTH_TOKEN;
+  const authToken = databaseAuthToken();
   const client = createClient({
-    url,
+    url: normalizedUrl,
     ...(authToken ? { authToken } : {}),
   });
   return {

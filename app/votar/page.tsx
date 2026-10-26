@@ -7,6 +7,8 @@ import {
   getSurveyWithOptions,
 } from "@/lib/survey";
 
+export const dynamic = "force-dynamic";
+
 export default function VotePage() {
   return (
     <main className="mx-auto w-full max-w-6xl flex-1 px-5 py-8 sm:px-8 lg:py-12">

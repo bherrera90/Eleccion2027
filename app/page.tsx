@@ -6,6 +6,8 @@ import { LoadingPanel } from "@/components/LoadingPanel";
 import { getVoterState } from "@/lib/session";
 import { getSurvey } from "@/lib/survey";
 
+export const dynamic = "force-dynamic";
+
 export default function HomePage() {
   return (
     <main className="mx-auto flex w-full max-w-6xl flex-1 items-center px-5 py-10 sm:px-8 lg:py-16">
@@ -64,7 +66,7 @@ async function HomeContent() {
         <ul className="flex flex-col gap-3 text-sm text-stone-600">
           {[
             "Cada cédula registrada permite emitir un único voto.",
-            "Puedes ver los detalles de cada lista o candidato antes de decidir.",
+            "Puedes ver los detalles de cada imagen u opcion antes de decidir.",
             "Los resultados se actualizan en tiempo real.",
           ].map((item) => (
             <li key={item} className="flex items-start gap-3">

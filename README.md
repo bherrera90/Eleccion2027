@@ -103,7 +103,7 @@ Cubren la validación y el consumo de códigos, la creación del voto y la garan
 Para Vercel, el sistema de archivos no es persistente: no uses `file:./data/survey.db` en producción. Opciones:
 
 1. Crear una base en [Turso](https://turso.tech/).
-2. Configurar `DATABASE_URL` y `DATABASE_AUTH_TOKEN` en el entorno de despliegue.
+2. Configurar `DATABASE_URL` y `DATABASE_AUTH_TOKEN` (o `TURSO_DATABASE_URL` y `TURSO_AUTH_TOKEN`) en Vercel. Sin esas variables la app intenta crear `./data/survey.db` y se queda cargando.
 3. Aplicar las migraciones contra Turso. Para ello, cambia temporalmente `drizzle.config.ts` a `dialect: "turso"` y añade `authToken` a `dbCredentials`, o usa la CLI de Turso.
 4. Configurar `ADMIN_PASSWORD` con una contraseña fuerte.
 

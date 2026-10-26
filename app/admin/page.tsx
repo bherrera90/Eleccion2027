@@ -21,6 +21,8 @@ const dateFormatter = new Intl.DateTimeFormat("es-ES", {
   timeStyle: "short",
 });
 
+export const dynamic = "force-dynamic";
+
 export default function AdminPage() {
   return (
     <main className="mx-auto w-full max-w-6xl flex-1 px-5 py-8 sm:px-8 lg:py-12">
