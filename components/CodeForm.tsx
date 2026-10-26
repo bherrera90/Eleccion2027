@@ -27,7 +27,7 @@ export function CodeForm() {
           spellCheck={false}
           maxLength={10}
           required
-          placeholder="1719663492"
+          placeholder="0000000000"
           aria-invalid={state.error ? true : undefined}
           aria-describedby={state.error ? "code-error" : "code-help"}
           className="w-full rounded-2xl border border-stone-300 bg-white px-4 py-3 font-mono text-xl tracking-[0.12em] text-stone-900 shadow-sm outline-none transition placeholder:text-stone-300 focus:border-teal-700 focus:ring-4 focus:ring-teal-700/10"

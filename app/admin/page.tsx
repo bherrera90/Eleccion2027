@@ -4,6 +4,8 @@ import {
   CopyCodeButton,
   ImportCedulasForm,
   LogoutForm,
+  ResetAllVotesButton,
+  ResetVoterButton,
   ToggleSurveyForm,
 } from "@/components/AdminForms";
 import { LoadingPanel } from "@/components/LoadingPanel";
@@ -97,11 +99,10 @@ async function AdminContent() {
               Administración
             </span>
             <span
-              className={`rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.12em] ${
-                survey.isOpen
+              className={`rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.12em] ${survey.isOpen
                   ? "bg-teal-100 text-teal-900"
                   : "bg-amber-100 text-amber-900"
-              }`}
+                }`}
             >
               {survey.isOpen ? "Abierta" : "Cerrada"}
             </span>
@@ -194,12 +195,15 @@ async function AdminContent() {
                 nuevos estudiantes o descargar el listado en formato CSV.
               </p>
             </div>
-            <a
-              href="/api/admin/codes"
-              className="inline-flex w-fit items-center justify-center rounded-full border border-stone-300 bg-white px-5 py-2.5 text-sm font-semibold text-stone-700 transition hover:bg-stone-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-stone-500"
-            >
-              Descargar padrón en CSV
-            </a>
+            <div className="flex flex-wrap items-center gap-3">
+              <ResetAllVotesButton />
+              <a
+                href="/api/admin/codes"
+                className="inline-flex w-fit items-center justify-center rounded-full border border-stone-300 bg-white px-5 py-2.5 text-sm font-semibold text-stone-700 transition hover:bg-stone-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-stone-500"
+              >
+                Descargar padrón en CSV
+              </a>
+            </div>
           </div>
 
           <div className="rounded-2xl bg-stone-50 p-4 sm:p-5">
@@ -230,11 +234,10 @@ async function AdminContent() {
                     </td>
                     <td className="px-4 py-2.5">
                       <span
-                        className={`rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.1em] ${
-                          row.usedAt
+                        className={`rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.1em] ${row.usedAt
                             ? "bg-red-100 text-red-800"
                             : "bg-teal-100 text-teal-800"
-                        }`}
+                          }`}
                       >
                         {row.usedAt ? "Ya votó" : "Disponible"}
                       </span>
@@ -243,7 +246,13 @@ async function AdminContent() {
                       {row.usedAt ? dateFormatter.format(row.usedAt) : "—"}
                     </td>
                     <td className="px-4 py-2.5 text-right">
-                      {row.usedAt ? null : <CopyCodeButton code={row.code} />}
+                      <div className="flex items-center justify-end gap-2">
+                        {row.usedAt ? (
+                          <ResetVoterButton codeId={row.id} code={row.code} />
+                        ) : (
+                          <CopyCodeButton code={row.code} />
+                        )}
+                      </div>
                     </td>
                   </tr>
                 ))}

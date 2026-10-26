@@ -1,11 +1,13 @@
 "use client";
 
-import { useActionState, useEffect, useState } from "react";
+import { useActionState, useEffect, useState, useTransition } from "react";
 import {
   adminLogin,
   adminLogout,
   generateCodes,
   importCedulas,
+  resetAllVotes,
+  resetVoter,
   toggleSurvey,
   type ActionState,
 } from "@/app/actions";
@@ -102,7 +104,7 @@ export function ImportCedulasForm() {
           Cargar cédulas al padrón electoral
         </label>
         <p className="text-xs text-stone-500">
-          Pega una cédula por línea. Puedes incluir el nombre completo: <code>1719663492, Juan Perez</code> o pegarlo directamente desde las columnas de Excel.
+          Pega una cédula por línea. Puedes incluir el nombre completo: <code>0000000000, Juan Perez</code> o pegarlo directamente desde las columnas de Excel.
         </p>
       </div>
       <textarea
@@ -195,3 +197,60 @@ export function CopyCodeButton({ code }: { code: string }) {
     </button>
   );
 }
+
+export function ResetVoterButton({
+  codeId,
+  code,
+}: {
+  codeId: number;
+  code: string;
+}) {
+  const [isPending, startTransition] = useTransition();
+
+  return (
+    <button
+      type="button"
+      disabled={isPending}
+      onClick={() => {
+        if (
+          window.confirm(
+            `¿Reactivar el voto para la cédula ${code}? Se borrará su voto actual y el estudiante podrá volver a votar.`,
+          )
+        ) {
+          startTransition(async () => {
+            await resetVoter(codeId);
+          });
+        }
+      }}
+      className="rounded-full border border-amber-300 bg-amber-50 px-2.5 py-1 text-[11px] font-semibold text-amber-900 transition hover:bg-amber-100 disabled:opacity-50"
+    >
+      {isPending ? "Reactivando…" : "Reactivar voto"}
+    </button>
+  );
+}
+
+export function ResetAllVotesButton() {
+  const [isPending, startTransition] = useTransition();
+
+  return (
+    <button
+      type="button"
+      disabled={isPending}
+      onClick={() => {
+        if (
+          window.confirm(
+            "⚠️ ¿ATENCIÓN: Estás seguro de borrar TODOS los votos registrados? Esta acción reiniciará todas las cédulas a estado 'Disponible' para que puedas comenzar la votación oficial desde cero.",
+          )
+        ) {
+          startTransition(async () => {
+            await resetAllVotes();
+          });
+        }
+      }}
+      className="inline-flex items-center justify-center rounded-full border border-red-200 bg-red-50 px-4 py-2 text-xs font-semibold text-red-700 transition hover:bg-red-100 disabled:opacity-50"
+    >
+      {isPending ? "Reiniciando…" : "Reiniciar todos los votos (Limpiar pruebas)"}
+    </button>
+  );
+}
+

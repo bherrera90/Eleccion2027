@@ -71,9 +71,13 @@ export function OptionCard({
         />
 
         <div className="flex items-center justify-between gap-3">
-          <span className="rounded-full bg-stone-100 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-stone-600">
-            {option.tag}
-          </span>
+          {option.tag ? (
+            <span className="rounded-full bg-stone-100 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-stone-600">
+              {option.tag}
+            </span>
+          ) : (
+            <span />
+          )}
           <span
             aria-hidden="true"
             className={`flex size-5 shrink-0 items-center justify-center rounded-full border transition ${
@@ -99,9 +103,11 @@ export function OptionCard({
         <span className="text-lg font-semibold leading-tight text-stone-900">
           {option.title}
         </span>
-        <span className="text-sm leading-6 text-stone-600">
-          {option.description}
-        </span>
+        {option.description ? (
+          <span className="text-sm leading-6 text-stone-600">
+            {option.description}
+          </span>
+        ) : null}
       </label>
     </div>
   );

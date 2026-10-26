@@ -7,7 +7,7 @@ export const codeSchema = z
   .transform(normalizeCode)
   .refine(
     (value) => CEDULA_PATTERN.test(value),
-    "La cédula debe tener 10 dígitos (ej: 1719663492).",
+    "La cédula debe tener 10 dígitos.",
   );
 
 export const optionIdSchema = z.coerce

@@ -7,7 +7,7 @@ import { redirect } from "next/navigation";
 import { cleanCedula } from "@/lib/codes";
 import { generateCode } from "@/lib/code-generator";
 import { db } from "@/lib/db/client";
-import { codes, surveys } from "@/lib/db/schema";
+import { codes, sessions, surveys, votes } from "@/lib/db/schema";
 import { getClientKey, rateLimit } from "@/lib/rate-limit";
 import {
   createSession,
@@ -283,4 +283,35 @@ export async function importCedulas(
     message: `Se importaron ${inserted.length} cédulas correctamente (${batch.length - inserted.length} omitidas por ya estar registradas).`,
   };
 }
+
+export async function resetVoter(codeId: number) {
+  const admin = await getAdminSession();
+  if (!admin) {
+    redirect("/admin");
+  }
+
+  await db.delete(votes).where(eq(votes.codeId, codeId));
+  await db.delete(sessions).where(eq(sessions.codeId, codeId));
+  await db.update(codes).set({ usedAt: null }).where(eq(codes.id, codeId));
+
+  revalidatePath("/admin");
+  revalidatePath("/resultados");
+  revalidatePath("/votar");
+}
+
+export async function resetAllVotes() {
+  const admin = await getAdminSession();
+  if (!admin) {
+    redirect("/admin");
+  }
+
+  await db.delete(votes);
+  await db.delete(sessions).where(eq(sessions.role, "voter"));
+  await db.update(codes).set({ usedAt: null });
+
+  revalidatePath("/admin");
+  revalidatePath("/resultados");
+  revalidatePath("/votar");
+}
+
 

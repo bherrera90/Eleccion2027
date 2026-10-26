@@ -1,8 +1,8 @@
 import { config } from "dotenv";
-import { eq } from "drizzle-orm";
+import { eq, inArray } from "drizzle-orm";
 import { surveyContent } from "../db/content";
 import { createDb } from "../lib/db/client";
-import { options, surveys } from "../lib/db/schema";
+import { codes, options, surveys, votes } from "../lib/db/schema";
 
 config({ path: ".env.local" });
 config();
@@ -58,13 +58,43 @@ async function main() {
       }
     }
 
-    if (surveyContent.options.length < existingOptions.length) {
-      console.warn(
-        "Hay opciones antiguas de más que no se han borrado para no perder votos. Bórralas manualmente si quieres.",
+    const validPositions = new Set(surveyContent.options.map((_, i) => i + 1));
+    const extraOptions = existingOptions.filter(
+      (existing) => !validPositions.has(existing.position),
+    );
+
+    if (extraOptions.length > 0) {
+      const extraOptionIds = extraOptions.map((o) => o.id);
+
+      const votesOnExtra = await db
+        .select()
+        .from(votes)
+        .where(inArray(votes.optionId, extraOptionIds));
+
+      if (votesOnExtra.length > 0) {
+        const codeIdsToFree = votesOnExtra.map((v) => v.codeId);
+        await db
+          .delete(votes)
+          .where(inArray(votes.optionId, extraOptionIds));
+
+        for (const codeId of codeIdsToFree) {
+          await db
+            .update(codes)
+            .set({ usedAt: null })
+            .where(eq(codes.id, codeId));
+        }
+      }
+
+      await db
+        .delete(options)
+        .where(inArray(options.id, extraOptionIds));
+
+      console.log(
+        `Se eliminaron ${extraOptions.length} opciones sobrantes (IDs: ${extraOptionIds.join(", ")}).`,
       );
     }
 
-    console.log("Contenido actualizado sin borrar votos.");
+    console.log(`Contenido actualizado correctamente con ${surveyContent.options.length} opciones.`);
   } finally {
     client.close();
   }

@@ -87,15 +87,19 @@ export function ImageDialog({ option, onClose }: ImageDialogProps) {
             </button>
           </div>
           <div className="flex flex-col gap-3 p-5 sm:p-6">
-            <span className="w-fit rounded-full bg-stone-100 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-stone-600">
-              {option.tag}
-            </span>
+            {option.tag ? (
+              <span className="w-fit rounded-full bg-stone-100 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-stone-600">
+                {option.tag}
+              </span>
+            ) : null}
             <h2 className="text-2xl font-semibold tracking-tight text-stone-900">
               {option.title}
             </h2>
-            <p className="text-sm leading-6 text-stone-600">
-              {option.description}
-            </p>
+            {option.description ? (
+              <p className="text-sm leading-6 text-stone-600">
+                {option.description}
+              </p>
+            ) : null}
             <button
               type="button"
               onClick={onClose}
