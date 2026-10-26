@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc">
+  <title id="title">Desierto</title>
+  <desc id="desc">Ilustración abstracta de dunas en tonos cálidos.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#431407"/>
+      <stop offset="0.45" stop-color="#b45309"/>
+      <stop offset="1" stop-color="#fcd34d"/>
+    </linearGradient>
+    <radialGradient id="sun" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#fffbeb"/>
+      <stop offset="0.6" stop-color="#fde68a"/>
+      <stop offset="1" stop-color="#f59e0b"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#bg)"/>
+  <circle cx="300" cy="250" r="140" fill="url(#sun)" opacity="0.9"/>
+  <path d="M0 520 C220 430 360 470 520 540 C700 620 880 610 1200 470 V800 H0 Z" fill="#92400e" opacity="0.6"/>
+  <path d="M0 640 C260 520 430 590 620 650 C800 706 980 690 1200 590 V800 H0 Z" fill="#78350f" opacity="0.75"/>
+  <path d="M0 740 C300 660 520 720 760 740 C940 754 1080 735 1200 700 V800 H0 Z" fill="#451a03" opacity="0.85"/>
+  <g fill="none" stroke="#fffbeb" stroke-opacity="0.22" stroke-width="2">
+    <path d="M540 585 q70 -26 140 0 t140 0"/>
+    <path d="M180 505 q50 -20 100 0 t100 0"/>
+  </g>
+  <text x="80" y="120" fill="#fffbeb" fill-opacity="0.4" font-family="system-ui, -apple-system, Segoe UI, sans-serif" font-size="180" font-weight="700">05</text>
+</svg>

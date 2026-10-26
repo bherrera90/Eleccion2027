@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc">
+  <title id="title">Nieve</title>
+  <desc id="desc">Ilustración abstracta de montañas nevadas en tonos fríos.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0f172a"/>
+      <stop offset="0.55" stop-color="#1e40af"/>
+      <stop offset="1" stop-color="#bae6fd"/>
+    </linearGradient>
+    <linearGradient id="peak" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f8fafc"/>
+      <stop offset="0.55" stop-color="#cbd5e1"/>
+      <stop offset="1" stop-color="#334155"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#bg)"/>
+  <circle cx="930" cy="180" r="110" fill="#f0f9ff" opacity="0.42"/>
+  <g>
+    <path d="M0 650 L250 260 L500 650 Z" fill="url(#peak)" opacity="0.9"/>
+    <path d="M330 700 L640 200 L950 700 Z" fill="url(#peak)"/>
+    <path d="M760 680 L990 320 L1200 680 Z" fill="url(#peak)" opacity="0.72"/>
+  </g>
+  <g fill="#f8fafc" opacity="0.9">
+    <path d="M640 200 L728 352 L696 340 L672 368 L644 344 L610 372 L580 340 Z"/>
+  </g>
+  <path d="M0 700 C200 670 380 720 580 700 C800 678 960 690 1200 660 V800 H0 Z" fill="#e0f2fe" opacity="0.45"/>
+  <g fill="#f8fafc" opacity="0.55">
+    <circle cx="180" cy="160" r="4"/>
+    <circle cx="330" cy="230" r="3"/>
+    <circle cx="520" cy="120" r="4"/>
+    <circle cx="760" cy="260" r="3"/>
+    <circle cx="1080" cy="300" r="4"/>
+    <circle cx="880" cy="120" r="3"/>
+  </g>
+  <text x="80" y="120" fill="#f0f9ff" fill-opacity="0.36" font-family="system-ui, -apple-system, Segoe UI, sans-serif" font-size="180" font-weight="700">06</text>
+</svg>

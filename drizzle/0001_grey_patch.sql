@@ -1,0 +1,1 @@
+ALTER TABLE `codes` ADD `full_name` text;

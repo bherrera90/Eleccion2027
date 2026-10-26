@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc">
+  <title id="title">Amanecer</title>
+  <desc id="desc">Ilustración abstracta de un amanecer con tonos naranjas y dorados.</desc>
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#7c2d12"/>
+      <stop offset="0.5" stop-color="#ea580c"/>
+      <stop offset="1" stop-color="#fcd34d"/>
+    </linearGradient>
+    <radialGradient id="sun" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#fffbeb"/>
+      <stop offset="0.55" stop-color="#fde68a"/>
+      <stop offset="1" stop-color="#f59e0b"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#sky)"/>
+  <circle cx="860" cy="300" r="190" fill="url(#sun)" opacity="0.95"/>
+  <circle cx="860" cy="300" r="240" fill="none" stroke="#fffbeb" stroke-opacity="0.18" stroke-width="2"/>
+  <circle cx="860" cy="300" r="290" fill="none" stroke="#fffbeb" stroke-opacity="0.1" stroke-width="2"/>
+  <path d="M0 560 C180 500 300 620 470 570 C650 516 760 470 930 540 C1070 598 1140 560 1200 530 V800 H0 Z" fill="#7c2d12" opacity="0.45"/>
+  <path d="M0 650 C220 590 360 700 560 650 C760 600 900 560 1200 650 V800 H0 Z" fill="#431407" opacity="0.55"/>
+  <text x="80" y="120" fill="#fffbeb" fill-opacity="0.55" font-family="system-ui, -apple-system, Segoe UI, sans-serif" font-size="180" font-weight="700">01</text>
+</svg>
