@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { formatCode, normalizeCode } from "../lib/codes";
+import { normalizeCode } from "../lib/codes";
 
 describe("cédulas ecuatorianas de votación", () => {
   it("normaliza espacios, guiones y puntos en la cédula", () => {

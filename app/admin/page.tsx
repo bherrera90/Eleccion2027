@@ -2,7 +2,6 @@ import { Suspense } from "react";
 import {
   AdminLoginForm,
   CopyCodeButton,
-  GenerateCodesForm,
   ImportCedulasForm,
   LogoutForm,
   ToggleSurveyForm,

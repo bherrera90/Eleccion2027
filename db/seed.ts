@@ -1,6 +1,5 @@
 import { config } from "dotenv";
 import { count, eq } from "drizzle-orm";
-import { generateCode } from "../lib/code-generator";
 import { createDb } from "../lib/db/client";
 import { codes, options, surveys } from "../lib/db/schema";
 import studentsData from "../data/students.json";
